@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="mt-4">
+	{% if results %}
+	<ul class="list-disc list-inside">
+		{% for result in results %}
+		<li>
+			<a
+				href="{% url 'app:product_detail' pk=result.pk %}"
+				class="text-blue-500 hover:text-blue-700"
+				>{{ result.name }}</a
+			>
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p class="text-red-500">No results found for "{{ request.GET.q }}".</p>
+	{% endif %}
+</div>
+{% endblock content %}

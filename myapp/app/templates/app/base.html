@@ -1,0 +1,94 @@
+{% load static %}
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'app/styles.css' %}" />
+	</head>
+	<body>
+		<nav class="bg-white shadow-lg">
+			<div class="max-w-6xl mx-auto px-4">
+				<div class="flex justify-between">
+					<div class="flex space-x-7 items-center">
+						<div>
+							<a
+								href="{% url 'app:products' %}"
+								class="flex items-center"
+							>
+								<img
+									class="h-8 w-8"
+									src="{% static 'app/images/icon.png' %}"
+									alt="Logo"
+								/>
+								<span
+									class="text-gray-500 font-semibold text-lg"
+									>Buy&Sell</span
+								>
+							</a>
+						</div>
+						<div class="flex space-x-1 items-center">
+							<a
+								href="{% url 'app:products' %}"
+								class="py-4 px-10 text-gray-500 font-semibold {% if request.resolver_match.url_name == 'products' %}border-b-4 border-green-500{% endif %}"
+								>Home</a
+							>
+							<a
+								href="{% url 'app:add_product' %}"
+								class="py-4 px-10 text-gray-500 font-semibold {% if request.resolver_match.url_name == 'add_product' %}border-b-4 border-green-500{% endif %}"
+								>Post Ad</a
+							>
+							<a
+								href="{% url 'app:products' %}"
+								class="py-4 px-10 text-gray-500 font-semibold"
+								>View products</a
+							>
+							{% if user.is_authenticated %}
+							<a
+								href="{% url 'users:logout' %}"
+								class="py-4 px-10 text-gray-500 font-semibold{% if request.resolver_match.url_name == 'logout' %}border-b-4 border-green-500{% endif %}"
+								>Logout</a
+							>
+							<a
+								class="py-4 px-10 text-gray-500 font-semibold {% if request.resolver_match.url_name == 'profile' %}border-b-4 border-green-500{% endif %}"
+								href="{% url 'users:profile' %}"
+								>Profile</a
+							>
+							<a
+								class="py-4 px-10 text-gray-500 font-semibold {% if request.resolver_match.url_name == 'mylistings' %}border-b-4 border-green-500{% endif %}"
+								href="{% url 'app:mylistings' %}"
+								>My Listings</a
+							>
+
+							{% else %}
+							<a
+								href="{% url 'users:login' %}"
+								class="py-4 px-20 text-gray-500 font-semibold {% if request.resolver_match.url_name == 'login' %}border-b-4 border-green-500{% endif %}"
+								>Login</a
+							>
+							{% endif %}
+							<form
+								action="{% url 'app:search' %}"
+								method="GET"
+								class="flex items-center"
+							>
+								<input
+									class="py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+									type="search"
+									placeholder="Search"
+									aria-label="Search"
+									name="q"
+								/>
+								<button
+									type="submit"
+									class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none ml-2"
+								>
+									Search
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		{% block content %} {% endblock %}
+	</body>
+</html>

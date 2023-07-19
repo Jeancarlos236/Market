@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+{% block content  %}
+<form method="POST">
+	{% csrf_token %}
+	<div class="rounded overflow-hidden shadow-lg h-100">
+		<p class="font-bold text-lg">Are you sure you want to delete "{{ object }}" ?</p>
+			<img class="w-1/6" src="{{product.image.url}}" alt="" />
+			<div class="px-6 py-4">
+				<div class="font-bold text-xl mb-2">{{product.name}}</div>
+				<div class="font-bold text-xl text-green-500 mb-2">
+					$ {{product.price}}
+				</div>
+				<div class="font-bold mb-2">
+					Posted By:
+					<span class="text-indigo-500">{{product.seller_name}}</span>
+				</div>
+				<p class="text-gray-700 text-base">{{product.desc}}</p>
+				{{form}}
+				<input class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit" value="Confirm" name="" id="" />
+			</div>
+		</div>
+</form>
+{% endblock  %}
